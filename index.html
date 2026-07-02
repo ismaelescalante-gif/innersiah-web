@@ -129,26 +129,12 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 1rem;
+    height: 600px;
+    overflow: hidden;
     animation: fadeUp 0.8s 0.4s ease both;
-  }
-
-  .hero-image .slide {
-    position: absolute;
-    width: 100%;
-    max-width: 480px;
-    height: 560px;
-    object-fit: cover;
-    border-radius: 16px;
-    display: block;
-    filter: brightness(0.9);
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .hero-image .slide.active {
-    opacity: 1;
-    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
   }
 
   .hero-image::before {
@@ -156,32 +142,39 @@
     position: absolute;
     inset: -1px;
     border-radius: 17px;
-    background: linear-gradient(135deg, rgba(91,107,245,0.35), transparent 60%);
+    background: linear-gradient(135deg, rgba(91,107,245,0.25), transparent 60%);
     z-index: 1;
     pointer-events: none;
   }
 
-  .slide-dots {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
+  .marquee-col {
+    flex: 1;
     display: flex;
-    gap: 6px;
-    z-index: 2;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+    animation: colScroll 22s linear infinite;
   }
 
-  .slide-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    transition: background 0.3s, transform 0.3s;
-    cursor: pointer;
+  .marquee-col.down {
+    animation-name: colScroll;
+    animation-direction: reverse;
+    animation-duration: 26s;
   }
 
-  .slide-dot.active {
-    background: var(--mint);
-    transform: scale(1.3);
+  .marquee-col img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+    filter: brightness(0.85);
+    flex-shrink: 0;
+  }
+
+  @keyframes colScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
   }
 
   @media (max-width: 900px) {
@@ -926,19 +919,21 @@
     </div>
   </div>
   <div class="hero-image" id="heroSlider">
-    <img class="slide active" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054390/Ideas_umcghs.png" alt="Innersiah Ideas">
-    <img class="slide" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054296/Ideas_qz0jiq.png" alt="Innersiah Ideas 2">
-    <img class="slide" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_2_fsoenq.png" alt="Innersiah Ideas 3">
-    <img class="slide" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_1_nopipw.png" alt="Innersiah Ideas 4">
-    <img class="slide" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861905/WhatsApp_Image_2026-05-28_at_11.21.42_PM_qgrhq0.jpg" alt="Innersiah equipo">
-    <img class="slide" src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861906/WhatsApp_Image_2026-06-03_at_8.45.41_PM_gc05xk.jpg" alt="Innersiah trabajo">
-    <div class="slide-dots">
-      <div class="slide-dot active" onclick="goToSlide(0)"></div>
-      <div class="slide-dot" onclick="goToSlide(1)"></div>
-      <div class="slide-dot" onclick="goToSlide(2)"></div>
-      <div class="slide-dot" onclick="goToSlide(3)"></div>
-      <div class="slide-dot" onclick="goToSlide(4)"></div>
-      <div class="slide-dot" onclick="goToSlide(5)"></div>
+    <div class="marquee-col up">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054390/Ideas_umcghs.png" alt="Innersiah Ideas">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054296/Ideas_qz0jiq.png" alt="Innersiah Ideas 2">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_2_fsoenq.png" alt="Innersiah Ideas 3">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054390/Ideas_umcghs.png" alt="" aria-hidden="true">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054296/Ideas_qz0jiq.png" alt="" aria-hidden="true">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_2_fsoenq.png" alt="" aria-hidden="true">
+    </div>
+    <div class="marquee-col down">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_1_nopipw.png" alt="Innersiah Ideas 4">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861905/WhatsApp_Image_2026-05-28_at_11.21.42_PM_qgrhq0.jpg" alt="Innersiah equipo">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861906/WhatsApp_Image_2026-06-03_at_8.45.41_PM_gc05xk.jpg" alt="Innersiah trabajo">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1781054391/Ideas_1_nopipw.png" alt="" aria-hidden="true">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861905/WhatsApp_Image_2026-05-28_at_11.21.42_PM_qgrhq0.jpg" alt="" aria-hidden="true">
+      <img src="https://res.cloudinary.com/de2t5oifa/image/upload/q_auto/f_auto/v1780861906/WhatsApp_Image_2026-06-03_at_8.45.41_PM_gc05xk.jpg" alt="" aria-hidden="true">
     </div>
   </div>
 </section>
@@ -1283,22 +1278,6 @@
     observer.observe(el);
   });
 
-  // Hero slider
-  let current = 0;
-  const slides = document.querySelectorAll('#heroSlider .slide');
-  const dots = document.querySelectorAll('#heroSlider .slide-dot');
-
-  function goToSlide(n) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = n;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  if (slides.length > 0) {
-    setInterval(() => goToSlide((current + 1) % slides.length), 3500);
-  }
 </script>
 </body>
 </html>
